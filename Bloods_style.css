@@ -1,0 +1,351 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  color: #ddd;
+  font-family: "Courier New", monospace;
+  min-height: 100vh;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background-image: url("xc.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: .25;
+  filter: brightness(.55) contrast(1.3);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(circle, transparent 10%, rgba(0,0,0,.55) 55%, #000 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 8px;
+  border: 1px solid rgba(255,0,0,.25);
+  pointer-events: none;
+  z-index: 100;
+}
+
+.site {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 35px 0;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+nav a {
+  color: #777;
+  text-decoration: none;
+  font-size: 14px;
+  transition: .2s;
+}
+
+nav a:hover {
+  color: #f11;
+}
+
+nav span {
+  position: absolute;
+  right: 0;
+  color: #f11;
+  font-size: 12px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 55px;
+}
+
+.logo {
+  display: block;
+  width: min(520px, 90%);
+  max-height: 320px;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(255,0,0,.45));
+}
+
+.hero h1 {
+  font-size: 18px;
+  letter-spacing: 5px;
+  margin-top: 15px;
+}
+
+.hero p {
+  color: #888;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 30px;
+}
+
+.box {
+  padding: 30px;
+  min-height: 270px;
+  background: rgba(0,0,0,.72);
+  border: 1px solid rgba(255,0,0,.25);
+  position: relative;
+  backdrop-filter: blur(5px);
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  width: 45px;
+  height: 25px;
+  border-left: 2px solid red;
+  border-top: 2px solid red;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+}
+
+.box p {
+  color: #999;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+#members-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.loading {
+  color: #666;
+  font-size: 12px;
+}
+
+.member-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,0,0,.20);
+  background: rgba(5,5,5,.9);
+  transition: .2s;
+}
+
+.member-card:hover {
+  border-color: rgba(255,0,0,.6);
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px rgba(255,0,0,.12);
+}
+
+.member-banner {
+  height: 90px;
+  background-size: cover;
+  background-position: center;
+  background-color: #170000;
+  background-image: linear-gradient(135deg, #090909, #2b0000);
+}
+
+.member-banner.no-banner {
+  background-image:
+    linear-gradient(135deg, rgba(0,0,0,.5), rgba(70,0,0,.35)),
+    repeating-linear-gradient(135deg, #080808 0 8px, #120000 8px 10px);
+}
+
+.member-body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px 14px;
+}
+
+.avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+  margin-top: -42px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #111;
+  border: 2px solid #000;
+  outline: 1px solid rgba(255,0,0,.6);
+  box-shadow: 0 0 15px rgba(255,0,0,.25);
+}
+
+.status {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #444;
+  border: 2px solid #000;
+}
+
+.status.online {
+  background: #23a55a;
+}
+
+.status.idle {
+  background: #f0b232;
+}
+
+.status.dnd {
+  background: #f23f43;
+}
+
+.member-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.member-name {
+  color: #eee;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.member-discord {
+  color: #777;
+  font-size: 10px;
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.member-rank {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px 7px;
+  border: 1px solid rgba(255,0,0,.45);
+  color: #f11;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  background: rgba(255,0,0,.06);
+}
+
+.member-status {
+  color: #555;
+  font-size: 9px;
+  margin-top: 5px;
+  text-transform: uppercase;
+}
+
+.member-arrow {
+  color: #f11;
+  text-decoration: none;
+  font-size: 22px;
+  padding: 8px;
+}
+
+.discord-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  padding: 14px 20px;
+  border: 1px solid red;
+  color: red;
+  text-decoration: none;
+  font-size: 12px;
+  transition: .25s;
+}
+
+.discord-button:hover {
+  background: red;
+  color: black;
+  box-shadow: 0 0 25px rgba(255,0,0,.4);
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0 40px;
+  margin-top: 70px;
+  border-top: 1px solid rgba(255,0,0,.25);
+  color: #444;
+  font-size: 11px;
+}
+
+@media (max-width: 850px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    gap: 20px;
+  }
+
+  nav span {
+    display: none;
+  }
+
+  .box {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .site {
+    width: 88%;
+  }
+
+  nav a {
+    font-size: 11px;
+  }
+
+  .hero h1 {
+    font-size: 15px;
+  }
+
+  .hero p {
+    font-size: 11px;
+  }
+
+  .member-banner {
+    height: 75px;
+  }
+
+  .avatar {
+    width: 56px;
+    height: 56px;
+  }
+}
